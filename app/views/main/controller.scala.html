@@ -1,0 +1,45 @@
+@()(implicit r: Request[_])
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>WS DEMO Dashboard</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script type='text/javascript' src='@routes.Assets.at("lib/jquery/jquery.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("lib/flot/jquery.flot.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/main.js")'></script>
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+	
+	<!-- UIkit JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>    
+</head>
+<body data-ws-url="@routes.MainController.ws.webSocketURL(Option(System.getProperty("heroku")).isDefined)">
+	<nav class="uk-navbar-container" uk-navbar>
+	    <div class="uk-navbar-left">f
+			<div class="uk-navbar-left">
+	        	<a class="uk-navbar-item uk-logo" href="#">WS DEMO Dashboard</a>
+	        </div>
+	    </div>
+	</nav>
+	<div id="main" class="uk-container" style="margin-top: 2em;">
+		<div uk-grid>
+			<div class="uk-width-3-4">
+				<div uk-grid>
+					@for(x <- (1 to 12).map(_.formatted("%02d"))) {
+				    	<div class="uk-width-1-4">
+				    		<img class="face-images" data-image-number=@x src="/assets/images/miku/miku_@{x}.jpg"/>
+				    	</div>
+				    }
+				</div>
+			</div>
+			<div class="uk-width-1-4">
+		    	<div>
+		    		<img id="cur-image" src="/assets/images/miku/miku_01.jpg"/>
+		    	</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
